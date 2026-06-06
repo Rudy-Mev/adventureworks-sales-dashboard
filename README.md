@@ -9,7 +9,7 @@ An interactive Power BI dashboard and an AI-generated executive report that turn
 
 ---
 
-## 📌 Business problem
+## Business problem
 
 AdventureWorks, a multinational bike retailer, wants to understand its online sales performance and turn data into decisions:
 
@@ -21,7 +21,7 @@ AdventureWorks, a multinational bike retailer, wants to understand its online sa
 
 ---
 
-## 🔑 Key insights (2012–2013)
+## Key insights (2012–2013)
 
 | KPI | Value |
 |---|---|
@@ -38,7 +38,7 @@ AdventureWorks, a multinational bike retailer, wants to understand its online sa
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 SQL Server (AdventureWorksDW)
@@ -70,7 +70,7 @@ A Python pipeline exports the model's KPIs and builds a structured context that 
 
 ---
 
-## 📊 Dashboard pages
+## Dashboard pages
 
 | Page | Question it answers |
 |---|---|
@@ -89,7 +89,7 @@ A Python pipeline exports the model's KPIs and builds a structured context that 
 
 ---
 
-## 📁 Repository structure
+## Repository structure
 
 ```
 ├── 01_SQL/              # Views (bi schema) + data-quality & validation scripts
@@ -102,7 +102,7 @@ A Python pipeline exports the model's KPIs and builds a structured context that 
 
 ---
 
-## ▶️ How to reproduce
+## How to reproduce
 1. Restore the `AdventureWorksDW` database in SQL Server.
 2. Run the SQL scripts in `01_SQL/` (views first, then quality checks).
 3. Open the `.pbix` in `02_PowerBI/` (update the data source to your server).
@@ -110,12 +110,12 @@ A Python pipeline exports the model's KPIs and builds a structured context that 
 
 ---
 
-## 👤 Author
+## Author
 
 **Rudy Mevizou** — Freelance Data Analyst (Power BI · SQL · Python)
 PhD in Biology · Data Scientist training (DataScientest)
 
-📧 rudymevizou@gmail.com
+📧 rudy.mevizou.data@outlook.com
 🔗 LinkedIn: *[à compléter]* · Malt: *[à compléter]*
 
 ---
