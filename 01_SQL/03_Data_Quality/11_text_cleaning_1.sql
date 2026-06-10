@@ -1,0 +1,1 @@
+LTRIM(RTRIM(FirstName)) AS FirstName

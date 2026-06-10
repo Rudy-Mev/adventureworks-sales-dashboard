@@ -1,0 +1,1 @@
+COALESCE(NULLIF(LTRIM(RTRIM(Color)), ''), 'Unknown') AS Color
