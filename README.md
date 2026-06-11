@@ -1,4 +1,4 @@
-# AdventureWorks — Sales Performance & Profitability (BI + AI)
+# AdventureWorks — Sales Performance & Profitability Dashboard | BI + AI Reporting
 
 **End-to-end analytics project:** SQL Server → Power BI → Python → AI-generated executive report.
 From raw sales data to an interactive dashboard **and** a decision-ready PDF report.
