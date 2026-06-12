@@ -1,0 +1,29 @@
+# ----- Secrets (future API keys) -----
+.env
+*.key
+*.pem
+
+# ----- Python -----
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ----- Data & working files (not for the repo) -----
+*.csv
+*.bak
+*.abf
+_charts/
+01_Data/
+**/Input/
+**/Output/_charts/
+ai_context_report.txt
+
+# ----- OS / editor -----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
