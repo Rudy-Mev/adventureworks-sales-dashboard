@@ -38,7 +38,7 @@ A complete BI pipeline built on the Microsoft **AdventureWorks** sales data:
 
 > **Who it's for.** The final deliverable is designed for a **sales manager** who needs fast visibility on revenue, margin, risks and actionable opportunities — without digging through spreadsheets.
 
-> **Business framing.** AdventureWorks wants to understand *where* revenue and margin come from, *how* performance evolves, and *what* to do next. This project answers all three.
+> **Try it in 30 seconds — no database required.** See [Quick demo](#-quick-demo-no-sql-server) below: a bundled synthetic sample lets you run the engine and generate the prompt and charts with a single command.
 
 ---
 
@@ -151,14 +151,15 @@ adventureworks-sales-dashboard/
 ├── 01_SQL/
 │   ├── 01_Schemas/             # bi schema
 │   ├── 02_Views/               # star-schema analytical views (bi.vw_*)
-│   ├── 03_Data_Quality/        # row counts, nulls, key uniqueness, grain, anomalies
+│   ├── 03_Data_Quality/        # row counts, nulls, key uniqueness, grain, anomalies (+ README)
 │   ├── 04_Business_Validation/ # revenue/profit and sales-by-year checks
 │   └── 05_AI_pipeline/         # fine-grain view + CSV export for the AI report
 ├── 02_PowerBI/
 │   └── AdventureWorks_Sales_Dashboard.pbix
 ├── 03_Python/
-│   ├── generate_ai_context.py   # compute KPIs → prompt + charts
-│   └── report_builder.py        # AI narrative + charts → branded PDF
+│   ├── generate_ai_context.py     # compute KPIs → prompt + charts
+│   ├── report_builder.py          # AI narrative + charts → branded PDF
+│   └── ai_sales_raw_sample.csv    # synthetic demo dataset (no DB needed)
 ├── 04_Report/
 │   ├── AdventureWorks_Executive_Report.pdf
 │   └── ai_report.md
@@ -173,6 +174,8 @@ adventureworks-sales-dashboard/
 pip install -r requirements.txt
 ```
 
+**Full pipeline (with the real data):**
+
 1. Restore **AdventureWorksDW** in SQL Server and run the scripts in `01_SQL/` in order: `01_Schemas` → `02_Views` → `03_Data_Quality` → `04_Business_Validation` → `05_AI_pipeline`.
 2. Export the fine-grain view (`bi.vw_AI_Sales_Raw`) to `01_Data/Input/ai_sales_raw.csv` (semicolon-separated).
 3. `python 03_Python/generate_ai_context.py` → produces `01_Data/Output/ai_context_report.txt` (the prompt) + the charts.
@@ -180,6 +183,20 @@ pip install -r requirements.txt
 5. `python 03_Python/report_builder.py` → builds the branded PDF.
 
 > Switch `REPORT_MODE` between `"full"` and `"executive"` in `generate_ai_context.py` to produce either a complete analysis or a tight executive brief.
+
+### ⚡ Quick demo (no SQL Server)
+
+A **synthetic sample** is bundled at `03_Python/ai_sales_raw_sample.csv` — same schema and separator as the SQL export, with **3 full years (2011–2013)** deliberately shaped so the *rebound* and *"New in {year}"* logic actually fire. The scripts **fall back to this sample automatically** when the real export is missing, so you can run the engine with no database:
+
+```bash
+pip install -r requirements.txt
+python 03_Python/generate_ai_context.py     # → 01_Data/Output/ai_context_report.txt + charts (from the sample)
+python 03_Python/report_builder.py          # → branded PDF (uses the committed 04_Report/ai_report.md as narrative)
+```
+
+This exercises the whole engine end-to-end: KPI computation, comparable-year YoY, rebound detection, risk/opportunity flags, prompt assembly, chart generation and PDF layout — **from the sample, no DB required.**
+
+> **Note.** The sample figures are synthetic and **do not match** the published report in `04_Report/` (that one is built from the real AdventureWorksDW data). The demo proves the *machinery* runs; the polished `04_Report/` PDF and the dashboard screenshots show the *real results*.
 
 ---
 
