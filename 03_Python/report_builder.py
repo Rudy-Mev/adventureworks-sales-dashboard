@@ -13,7 +13,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle,
-                                PageBreak, Frame, PageTemplate, NextPageTemplate)
+                                PageBreak, Frame, PageTemplate, NextPageTemplate, KeepTogether)
 from PIL import Image as PILImage
 
 # ============================ REGLAGES (branding) ============================
@@ -26,6 +26,10 @@ PALETTE = {"gold":"#C9B46A","char":"#262626","cream":"#F3F0E7","ink":"#3A3A36"}
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTD=os.path.join(BASE,"01_Data","Output"); CH=os.path.join(OUTD,"_charts")
 MDp=os.path.join(OUTD,"ai_report.md"); OUT=os.path.join(OUTD,f"{CLIENT}_Executive_Report.pdf")
+os.makedirs(OUTD,exist_ok=True)
+if not os.path.exists(MDp):  # demo: fallback sur la narration livree dans 04_Report
+    _FB=os.path.join(BASE,"04_Report","ai_report.md")
+    if os.path.exists(_FB): MDp=_FB; print("[demo] narration LLM absente -> 04_Report/ai_report.md")
 gold=colors.HexColor(PALETTE["gold"]); char=colors.HexColor(PALETTE["char"]); cream=colors.HexColor(PALETTE["cream"]); ink=colors.HexColor(PALETTE["ink"])
 
 styles=getSampleStyleSheet()
@@ -110,7 +114,6 @@ if charts:
     for i,p in enumerate(charts):
         name=re.sub(r"^\d+_","",os.path.basename(p)).replace(".png","")
         w=110*mm if "vs" in name else 160*mm
-        story+=[figimg(p,w),cap(f"Figure {i+1} - {name}")]
-        if i==2: story.append(PageBreak())
+        story.append(KeepTogether([figimg(p,w),cap(f"Figure {i+1} - {name}"),Spacer(1,6)]))
     story+=[Spacer(1,6),Paragraph("Charts generated automatically from the source data. Orders/Customers are distinct counts (nunique).",small)]
-doc.build(story); print("PDF OK:",OUT)
+doc.build(story); print("PDF OK:", OUT)
