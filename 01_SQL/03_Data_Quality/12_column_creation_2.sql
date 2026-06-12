@@ -1,1 +1,0 @@
-CONCAT(FirstName, ' ', LastName) AS CustomerName
