@@ -13,6 +13,7 @@ venv/
 
 # ----- Data & working files (not for the repo) -----
 *.csv
+!03_Python/ai_sales_raw_sample.csv
 *.bak
 *.abf
 _charts/
@@ -27,3 +28,5 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+
