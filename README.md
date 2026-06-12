@@ -1,9 +1,30 @@
-# AdventureWorks — Sales Performance & Profitability Dashboard | BI + AI Reporting
+# AdventureWorks — Sales Performance & Profitability (BI + AI)
 
 **End-to-end analytics project:** SQL Server → Power BI → Python → AI-generated executive report.
 From raw sales data to an interactive dashboard **and** a decision-ready PDF report.
 
 `SQL Server` · `Power BI` · `DAX` · `Power Query (M)` · `Python (pandas)` · `AI reporting` · `reportlab`
+
+![Dashboard preview](screenshots/dashboard_01_overview.png)
+> *Dashboard preview — Overview page. (Swap in a dedicated `screenshots/dashboard_preview.png` for a wider banner if you have one.)*
+
+---
+
+## 🎯 Business problem
+
+AdventureWorks operates across multiple countries, product categories, and customer segments. Without a centralized reporting solution, decision-makers must manually consolidate data from several sources, making it hard to identify performance drivers and act in time.
+
+Management needs a clear understanding of:
+
+- Which **products** drive revenue and profitability.
+- Which **customer segments** generate the highest value.
+- Which **regions** are growing or declining.
+- Where **commercial efforts** should be prioritized.
+- Which areas present **risks or growth opportunities**.
+
+> **Business question:** *How can AdventureWorks identify revenue drivers, profitability risks, and growth opportunities — from a single source of truth?*
+
+The objective of this project is to transform raw sales data into actionable business insights through a complete analytics workflow combining **SQL, Power BI, Python automation, and AI-generated executive reporting**.
 
 ---
 
@@ -14,6 +35,8 @@ A complete BI pipeline built on the Microsoft **AdventureWorks** sales data:
 1. **SQL** — analytical views in a dedicated `bi` schema + a data-quality suite.
 2. **Power BI** — a clean star schema, **130 DAX measures**, and a 5-page interactive dashboard.
 3. **Python + AI** — a reusable pipeline that computes the KPIs, builds charts, prompts an LLM, and assembles a **branded executive PDF report** — with built-in analytical guardrails.
+
+> **Who it's for.** The final deliverable is designed for a **sales manager** who needs fast visibility on revenue, margin, risks and actionable opportunities — without digging through spreadsheets.
 
 > **Business framing.** AdventureWorks wants to understand *where* revenue and margin come from, *how* performance evolves, and *what* to do next. This project answers all three.
 
@@ -40,6 +63,24 @@ Executive Report (PDF)
 
 ---
 
+## 🧩 Data model
+
+A classic **star schema**, optimized for slicing and time intelligence:
+
+| Table | Type | Role |
+|---|---|---|
+| **FactSales** | Fact | Order-line grain — revenue, cost, profit, quantity |
+| **DimDate** | Dimension | Calendar + time intelligence (YoY, YTD) |
+| **DimProduct** | Dimension | Category / subcategory / product |
+| **DimCustomer** | Dimension | Demographics & segments (age bands) |
+| **DimTerritory** | Dimension | Country / region / group |
+
+*One fact table surrounded by conformed dimensions keeps measures simple, relationships unambiguous, and time intelligence reliable.*
+
+![Star schema — data model](screenshots/data_model.png)
+
+---
+
 ## 📊 Power BI dashboard
 
 A 5-page interactive report (Overview · Trends & Seasonality · Product · Territory · Customer) with a custom theme, dynamic KPI cards, opportunity matrices and slicers.
@@ -59,6 +100,8 @@ A 5-page interactive report (Overview · Trends & Seasonality · Product · Terr
 ## 📄 AI-generated executive report
 
 The Python pipeline turns the same data into a **branded, decision-ready PDF** — an executive summary, detailed analysis, prioritized recommendations, and an appendix of auto-generated charts. The narrative is written by an LLM **from the computed figures** (no invented numbers), framed by analytical guardrails.
+
+> **The LLM does not calculate KPIs.** It only generates the narrative from Python-computed outputs — every number in the report comes from the pipeline, not the model.
 
 | Cover | Executive summary |
 |---|---|
@@ -90,10 +133,18 @@ The Python pipeline turns the same data into a **branded, decision-ready PDF** �
 
 ---
 
+## 🧠 What I learned / Challenges
+
+- **Handling non-comparable years** — early and partial years distort year-over-year reads. I built logic to compare only fully comparable years and to distinguish a *rebound* from *organic* growth, rather than reporting a misleading +180%.
+- **Avoiding inflated distinct counts** — summing distinct customers or orders across segments overcounts by ~2.7×. Enforcing `COUNT(DISTINCT …)` / `nunique` end-to-end was essential for trustworthy KPIs.
+- **Separating BI calculations from AI narrative** — KPIs are computed in SQL and Python; the LLM only writes the story from those validated numbers. Keeping the math and the narrative in separate layers makes the output both reproducible and safe to share.
+
+---
+
 ## 📁 Repository structure
 
 ```
-adventureworks-sales-bi/
+adventureworks-sales-dashboard/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
@@ -143,4 +194,4 @@ pip install -r requirements.txt
 **Rudy Mevizou** — Freelance Data Analyst (Power BI · SQL · Python)
 PhD in Biology · Data Scientist training (DataScientest)
 
-📧 rudy.mevizou.data@outlook.com · 🔗 LinkedIn: *[à compléter]* · Malt: *[à compléter]*
+📧 rudy.mevizou.data@outlook.com · 🔗 [LinkedIn](https://www.linkedin.com/in/your-handle) · [Malt](https://www.malt.fr/profile/your-handle)
