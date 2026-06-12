@@ -6,7 +6,7 @@ From raw sales data to an interactive dashboard **and** a decision-ready PDF rep
 `SQL Server` · `Power BI` · `DAX` · `Power Query (M)` · `Python (pandas)` · `AI reporting` · `reportlab`
 
 ![Dashboard preview](screenshots/dashboard_01_overview.png)
-> *Dashboard preview — Overview page. (Swap in a dedicated `screenshots/dashboard_preview.png` for a wider banner if you have one.)*
+> *Dashboard preview — Overview page.*
 
 ---
 
