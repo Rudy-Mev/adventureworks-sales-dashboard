@@ -34,7 +34,7 @@ A complete BI pipeline built on the Microsoft **AdventureWorks** sales data:
 
 1. **SQL** — analytical views in a dedicated `bi` schema + a data-quality suite.
 2. **Power BI** — a clean star schema, **130 DAX measures**, and a 5-page interactive dashboard.
-3. **Python + AI** — a reusable pipeline that computes the KPIs, builds charts, prompts an LLM, and assembles a **branded executive PDF report** — with built-in analytical guardrails.
+3. **Python + AI** — a workflow that computes the KPIs, builds charts, prompts an LLM, and assembles a **branded executive PDF report** — with built-in analytical guardrails. *(The LLM step is run manually — see "Reproduce" below.)*
 
 > **Who it's for.** The final deliverable is designed for a **sales manager** who needs fast visibility on revenue, margin, risks and actionable opportunities — without digging through spreadsheets.
 
@@ -55,7 +55,7 @@ Power BI  ──  star schema (Sales fact · Date / Product / Customer / Territo
    ▼
 Python pipeline
    ├─ generate_ai_context.py  → computes KPIs (sum + nunique) → prompt + charts
-   ├─ [LLM writes the narrative] → ai_report.md
+   ├─ [LLM writes the narrative — manual step] → ai_report.md
    └─ report_builder.py  → branded PDF (narrative + charts)
    ▼
 Executive Report (PDF)
@@ -93,7 +93,7 @@ A 5-page interactive report (Overview · Trends & Seasonality · Product · Terr
 |---|---|---|
 | ![Product](screenshots/dashboard_03_product.png) | ![Territory](screenshots/dashboard_04_territory.png) | ![Customer](screenshots/dashboard_05_customer.png) |
 
-📂 Open the dashboard: [`02_powerbi/AdventureWorks_Sales_Dashboard.pbix`](02_powerbi/AdventureWorks_Sales_Dashboard.pbix)
+📂 Open the dashboard: [`02_PowerBI/AdventureWorks_Sales_Dashboard.pbix`](02_PowerBI/AdventureWorks_Sales_Dashboard.pbix)
 
 ---
 
@@ -107,7 +107,7 @@ The Python pipeline turns the same data into a **branded, decision-ready PDF** �
 |---|---|
 | ![Report cover](screenshots/report_preview_cover.png) | ![Report summary](screenshots/report_preview_summary.png) |
 
-📄 Read the full report: [`04_report/AdventureWorks_Executive_Report.pdf`](04_report/AdventureWorks_Executive_Report.pdf)
+📄 Read the full report: [`04_Report/AdventureWorks_Executive_Report.pdf`](04_Report/AdventureWorks_Executive_Report.pdf)
 
 ---
 
@@ -148,17 +148,18 @@ adventureworks-sales-dashboard/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
-├── 01_sql/
-│   ├── views/            # bi schema + analytical views
-│   ├── data_quality/     # data-quality checks
-│   ├── validation/       # business validation queries
-│   └── ai_pipeline/      # fine-grain view + export for the AI report
-├── 02_powerbi/
+├── 01_SQL/
+│   ├── 01_Schemas/             # bi schema
+│   ├── 02_Views/               # star-schema analytical views (bi.vw_*)
+│   ├── 03_Data_Quality/        # row counts, nulls, key uniqueness, grain, anomalies
+│   ├── 04_Business_Validation/ # revenue/profit and sales-by-year checks
+│   └── 05_AI_pipeline/         # fine-grain view + CSV export for the AI report
+├── 02_PowerBI/
 │   └── AdventureWorks_Sales_Dashboard.pbix
-├── 03_python/
-│   ├── generate_ai_context.py   # compute → prompt + charts
-│   └── report_builder.py        # narrative + charts → PDF
-├── 04_report/
+├── 03_Python/
+│   ├── generate_ai_context.py   # compute KPIs → prompt + charts
+│   └── report_builder.py        # AI narrative + charts → branded PDF
+├── 04_Report/
 │   ├── AdventureWorks_Executive_Report.pdf
 │   └── ai_report.md
 └── screenshots/
@@ -172,10 +173,11 @@ adventureworks-sales-dashboard/
 pip install -r requirements.txt
 ```
 
-1. Restore **AdventureWorksDW** in SQL Server and run the scripts in `01_sql/` (views → quality → ai_pipeline). Export the fine-grain view to `ai_sales_raw.csv`.
-2. `python 03_python/generate_ai_context.py` → produces the prompt + the charts.
-3. Paste the prompt into an LLM (Claude / ChatGPT) and save the answer as `ai_report.md`.
-4. `python 03_python/report_builder.py` → builds the PDF.
+1. Restore **AdventureWorksDW** in SQL Server and run the scripts in `01_SQL/` in order: `01_Schemas` → `02_Views` → `03_Data_Quality` → `04_Business_Validation` → `05_AI_pipeline`.
+2. Export the fine-grain view (`bi.vw_AI_Sales_Raw`) to `01_Data/Input/ai_sales_raw.csv` (semicolon-separated).
+3. `python 03_Python/generate_ai_context.py` → produces `01_Data/Output/ai_context_report.txt` (the prompt) + the charts.
+4. Paste the prompt into an LLM (Claude / ChatGPT) and save the answer as `01_Data/Output/ai_report.md`.
+5. `python 03_Python/report_builder.py` → builds the branded PDF.
 
 > Switch `REPORT_MODE` between `"full"` and `"executive"` in `generate_ai_context.py` to produce either a complete analysis or a tight executive brief.
 
@@ -194,4 +196,6 @@ pip install -r requirements.txt
 **Rudy Mevizou** — Freelance Data Analyst (Power BI · SQL · Python)
 PhD in Biology · Data Scientist training (DataScientest)
 
-📧 rudy.mevizou.data@outlook.com · 🔗 [LinkedIn](https://www.linkedin.com/in/your-handle) · [Malt](https://www.malt.fr/profile/your-handle)
+📧 rudy.mevizou.data@outlook.com · 🔗 LinkedIn: **TODO** · Malt: **TODO**
+
+<!-- ⚠️ Replace the two TODO above with your real LinkedIn and Malt profile URLs before sharing. -->
