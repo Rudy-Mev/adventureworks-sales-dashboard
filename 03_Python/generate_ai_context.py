@@ -30,6 +30,9 @@ PALETTE={"gold":"#C9B46A","sage":"#7CA17B","beige":"#D6D2C8","char":"#262626"}
 
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV=os.path.join(BASE,"01_Data","Input","ai_sales_raw.csv")
+if not os.path.exists(CSV):  # demo: fallback sur l'echantillon livre si l'export SQL est absent
+    _S=os.path.join(os.path.dirname(os.path.abspath(__file__)),"ai_sales_raw_sample.csv")
+    if os.path.exists(_S): CSV=_S; print("[demo] CSV SQL absent -> echantillon:",os.path.basename(CSV))
 OUTD=os.path.join(BASE,"01_Data","Output"); CH=os.path.join(OUTD,"_charts"); os.makedirs(CH,exist_ok=True)
 for f in os.listdir(CH):
     if f.endswith(".png"): os.remove(os.path.join(CH,f))
