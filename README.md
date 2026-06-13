@@ -151,6 +151,9 @@ adventureworks-sales-dashboard/
 ├── requirements.txt
 ├── requirements-dev.txt
 ├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── tests.yml          # CI: runs pytest on every push
 ├── 01_SQL/
 │   ├── 01_Schemas/             # bi schema
 │   ├── 02_Views/               # star-schema analytical views (bi.vw_*)
