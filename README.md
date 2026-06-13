@@ -160,12 +160,14 @@ adventureworks-sales-dashboard/
 ├── 03_Python/
 │   ├── generate_ai_context.py     # compute KPIs → prompt + charts
 │   ├── report_builder.py          # AI narrative + charts → branded PDF
+│   ├── analytics_extra.py         # attach cross-sell + revenue outlook (optional depth)
 │   └── ai_sales_raw_sample.csv    # synthetic demo dataset (no DB needed)
 ├── 04_Report/
 │   ├── AdventureWorks_Executive_Report.pdf
 │   └── ai_report.md
 ├── tests/
-│   └── test_analytics.py
+│   ├── test_analytics.py
+│   └── test_analytics_extra.py
 └── screenshots/
 ```
 
