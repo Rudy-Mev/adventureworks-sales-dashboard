@@ -214,7 +214,7 @@ This exercises the whole engine end-to-end: KPI computation, comparable-year YoY
 
 The core analytics guarantees are unit-tested with `pytest`: distinct counts that are never
 summed, year-over-year on comparable years only, launch ("New in {year}") detection, and the
-growth / margin / business-signal classification thresholds, plus the accessories attach-rate and the revenue forecast
+growth / margin / business-signal classification thresholds, plus the accessories attach-rate and the revenue forecast.
 
 ```bash
 pip install -r requirements-dev.txt
