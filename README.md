@@ -236,4 +236,4 @@ pytest -q
 **Rudy Mevizou** — Freelance Data Analyst (Power BI · SQL · Python)
 PhD in Biology · Data Scientist training (DataScientest)
 
-📧 rudy.mevizou.data@outlook.com · 🔗 [LinkedIn](https://www.linkedin.com/in/rudymevizou/)  · Malt: **TODO**
+📧 rudy.mevizou.data@outlook.com · 🔗 [LinkedIn](https://www.linkedin.com/in/rudymevizou/)  · [**Malt**](https://www.malt.fr/profile/rudymevizou)
