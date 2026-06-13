@@ -20,6 +20,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
+import analytics_extra
 
 
 # ============================ CONFIG (edit per project) ============================
@@ -391,6 +392,7 @@ LATEST COMPLETE YEAR — {LY} vs {PY}
         for v, k in allseg[c].value_counts(dropna=False).items():
             ai += f"- {v}: {k} segments\n"
     ai += f"\nRiskFlag = Yes: {int(allseg['RiskFlag'].sum())} | OpportunityFlag = Yes: {int(allseg['OpportunityFlag'].sum())}\n"
+    ai += analytics_extra.build_extra_sections(ctx["df"], ctx["rev_by_year"], CURRENCY)
 
     if REPORT_MODE == "executive":
         output_structure = ("EXPECTED OUTPUT STRUCTURE (return as plain Markdown text — do NOT build a PDF, the PDF is generated separately) - EXECUTIVE, concise (~3-4 pages)\n\n"
