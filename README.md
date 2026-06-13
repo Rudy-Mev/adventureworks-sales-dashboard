@@ -147,6 +147,7 @@ The Python pipeline turns the same data into a **branded, decision-ready PDF** �
 adventureworks-sales-dashboard/
 ├── README.md
 ├── requirements.txt
+├── requirements-dev.txt
 ├── .gitignore
 ├── 01_SQL/
 │   ├── 01_Schemas/             # bi schema
@@ -163,6 +164,8 @@ adventureworks-sales-dashboard/
 ├── 04_Report/
 │   ├── AdventureWorks_Executive_Report.pdf
 │   └── ai_report.md
+├── tests/
+│   └── test_analytics.py
 └── screenshots/
 ```
 
@@ -197,6 +200,19 @@ python 03_Python/report_builder.py          # → branded PDF (uses the committe
 This exercises the whole engine end-to-end: KPI computation, comparable-year YoY, rebound detection, risk/opportunity flags, prompt assembly, chart generation and PDF layout — **from the sample, no DB required.**
 
 > **Note.** The sample figures are synthetic and **do not match** the published report in `04_Report/` (that one is built from the real AdventureWorksDW data). The demo proves the *machinery* runs; the polished `04_Report/` PDF and the dashboard screenshots show the *real results*.
+
+---
+
+## ✅ Tests
+
+The core analytics guarantees are unit-tested with `pytest`: distinct counts that are never
+summed, year-over-year on comparable years only, launch ("New in {year}") detection, and the
+growth / margin / business-signal classification thresholds.
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
 
 ---
 
