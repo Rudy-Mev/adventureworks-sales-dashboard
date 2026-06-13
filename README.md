@@ -33,7 +33,7 @@ The objective of this project is to transform raw sales data into actionable bus
 A complete BI pipeline built on the Microsoft **AdventureWorks** sales data:
 
 1. **SQL** — analytical views in a dedicated `bi` schema + a data-quality suite.
-2. **Power BI** — a clean star schema, **130 DAX measures**, and a 5-page interactive dashboard.
+2. **Power BI** — a clean star schema, a **library of DAX measures** (base metrics, ratios, time intelligence), and a 5-page interactive dashboard.
 3. **Python + AI** — a workflow that computes the KPIs, builds charts, prompts an LLM, and assembles a **branded executive PDF report** — with built-in analytical guardrails. *(The LLM step is run manually — see "Reproduce" below.)*
 
 > **Who it's for.** The final deliverable is designed for a **sales manager** who needs fast visibility on revenue, margin, risks and actionable opportunities — without digging through spreadsheets.
@@ -49,7 +49,7 @@ SQL Server (AdventureWorksDW)
    │  bi.* analytical views  +  data-quality checks
    ▼
 Power BI  ──  star schema (Sales fact · Date / Product / Customer / Territory)
-   │          130 DAX measures · time intelligence · dynamic titles
+   │          DAX measure library · time intelligence · dynamic titles
    ├─►  Interactive dashboard (5 pages)
    │
    ▼
