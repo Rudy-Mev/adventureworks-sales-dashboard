@@ -5,7 +5,7 @@ From raw sales data to an interactive dashboard **and** a decision-ready PDF rep
 
 `SQL Server` · `Power BI` · `DAX` · `Power Query (M)` · `Python (pandas)` · `AI reporting` · `reportlab`
 
-![tests](https://github.com/Rudy-Mev/adventureworks-sales-dashboard/actions/workflows/tests.yml/badge.svg)
+[![tests](https://github.com/Rudy-Mev/adventureworks-sales-dashboard/actions/workflows/tests.yml/badge.svg)](https://github.com/Rudy-Mev/adventureworks-sales-dashboard/actions/workflows/tests.yml)
 
 ![Dashboard preview](screenshots/dashboard_01_overview.png)
 > *Dashboard preview — Overview page.*
